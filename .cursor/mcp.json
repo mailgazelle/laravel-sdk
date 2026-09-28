@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+      "laravel-boost": {
+          "command": "php",
+          "args": [
+              "./artisan",
+              "boost:mcp"
+          ]
+      },
+      "herd": {
+          "command": "php",
+          "args": [
+              "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
+          ],
+          "env": {
+              "SITE_PATH": "/Users/srdjan/Projects/private/easypm"
+          }
+      },
+      "pm": {
+          "url": "https://pm.foobar.rs/mcp"
+      }
+  }
+}
