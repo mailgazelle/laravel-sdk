@@ -1,0 +1,4 @@
+changelog: CHANGELOG.md
+version: src/MailGazelleServiceProvider.php
+version_pattern: "public const VERSION = '{version}';"
+tag_prefix: v
