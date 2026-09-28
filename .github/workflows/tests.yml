@@ -1,0 +1,78 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: "8.2"
+            laravel: "^11.0"
+            testbench: "^9.18"
+          - php: "8.3"
+            laravel: "^11.0"
+            testbench: "^9.18"
+          - php: "8.4"
+            laravel: "^11.0"
+            testbench: "^9.18"
+          - php: "8.2"
+            laravel: "^12.0"
+            testbench: "^10.12"
+          - php: "8.3"
+            laravel: "^12.0"
+            testbench: "^10.12"
+          - php: "8.4"
+            laravel: "^12.0"
+            testbench: "^10.12"
+          - php: "8.3"
+            laravel: "^13.0"
+            testbench: "^11.3"
+          - php: "8.4"
+            laravel: "^13.0"
+            testbench: "^11.3"
+
+    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, json
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "illuminate/support:${{ matrix.laravel }}" "illuminate/mail:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Run tests
+        run: vendor/bin/phpunit
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: curl, json
+          coverage: none
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Check formatting
+        run: vendor/bin/pint --test

@@ -1,0 +1,62 @@
+{
+    "name": "mailgazelle/laravel-sdk",
+    "description": "Mail Gazelle mail transport for Laravel.",
+    "keywords": [
+        "email",
+        "laravel",
+        "mail",
+        "mailgazelle",
+        "sdk"
+    ],
+    "homepage": "https://mailgazelle.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Srdjan Marjanovic",
+            "email": "srdjan@foobar.rs"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "illuminate/mail": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "mailgazelle/php-sdk": "^1.1",
+        "symfony/mailer": "^7.0|^8.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.21",
+        "orchestra/testbench": "^9.18|^10.12|^11.3",
+        "phpunit/phpunit": "^11.5.50"
+    },
+    "autoload": {
+        "psr-4": {
+            "MailGazelle\\Laravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MailGazelle\\Laravel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "MailGazelle": "MailGazelle\\Laravel\\Facades\\MailGazelle"
+            },
+            "providers": [
+                "MailGazelle\\Laravel\\MailGazelleServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "format": "pint",
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
